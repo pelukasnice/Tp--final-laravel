@@ -29,9 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/post',[ConductorController::class,'index'])->name('conductor.index');
+Route::get('/conductor',[ConductorController::class,'index'])->name('conductor.index');
 
-Route::get('/post',[ConductorController::class,'store'])->name('conductor.store');
+Route::post('/post',[ConductorController::class,'store'])->name('conductor.store');
 Route::get('/post',[ConductorController::class,'index'])->name('conductor.index');
 Route::get('/post/delete{id}',[ConductorController::class,'destroy'])->name('conductor.delete');
 

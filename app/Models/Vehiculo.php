@@ -11,7 +11,9 @@ class Vehiculo extends Model
 
     protected $fillable = ['marca', 'modelo', 'patente', 'tipo', 'conductor_id'];
 
-    public function usuario()
+    protected $table = 'registro_vehiculo';
+
+    public function vehiculos()
     {
         return $this->belongsTo(Conductor::class);
     }

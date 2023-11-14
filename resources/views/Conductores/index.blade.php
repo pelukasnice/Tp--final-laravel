@@ -40,33 +40,49 @@
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form action="" method="POST" class="p-4 md:p-5">
+                                <form action="{{ route('conductor.store') }}" method="POST" class="p-4 md:p-5">
+                                    @csrf
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <!-- NOMBRE Y APELLIDO -->
                                         <div class="col-span-2">
-                                            <label for="name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
-                                                y Apellido</label>
-                                            <input type="text" name="nombre" id="nombre"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                 required="">
+                                            <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre y Apellido</label>
+                                            <input type="text" name="nombre" id="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                                         </div>
                                         <!-- DNI -->
                                         <div class="col-span-2 sm:col-span-1">
-                                            <label for="dni"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DNI</label>
-                                            <input type="text" name="dni" id="dni"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                 required="">
+                                            <label for="dni" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DNI</label>
+                                            <input type="text" name="dni" id="dni" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                                         </div>
+                                        <!-- TIPO DEL VEHÍCULO -->
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="tipo_vehiculo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo del Vehículo</label>
+                                            <select name="tipo_vehiculo" id="tipo_vehiculo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                                                <option value="standard">Standard</option>
+                                                <option value="SUV">SUV</option>
+                                                <option value="Camioneta">Camioneta</option>
+                                                <option value="Camión">Camión</option>
+                                            </select>
+                                        </div>
+                                        <!-- MARCA DEL VEHÍCULO -->
+                                        <div class="col-span-2">
+                                            <label for="marca_vehiculo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marca del Vehículo</label>
+                                            <input type="text" name="marca_vehiculo" id="marca_vehiculo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                                        </div>
+                                        <!-- MODELO DEL VEHÍCULO -->
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="modelo_vehiculo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo del Vehículo</label>
+                                            <input type="text" name="modelo_vehiculo" id="modelo_vehiculo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                                        </div>
+                                        <!-- PATENTE DEL VEHÍCULO -->
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="patente_vehiculo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Patente del Vehículo</label>
+                                            <input type="text" name="patente_vehiculo" id="patente_vehiculo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                                        </div>
+                                        
                                     </div>
-                                    <button type="submit"
-                                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                                clip-rule="evenodd"></path>
+                                    <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                                         </svg>
                                         Agregar Conductor
                                     </button>
@@ -91,7 +107,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($conductor as $conductores)
+                                @foreach ($conductores as $conductor)
                                                                
                                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                     <th scope="row"
@@ -102,10 +118,12 @@
                                         {{ $conductor->dni }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $conductor->vehiculos->count() }}
+                                        {{ $conductor->vehiculos ? $conductor->vehiculos->count():0 }} 
+                                        
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $conductor->infracciones->count() }}
+                                        {{ $conductor->infracciones ? $conductor->infracciones->count() : 0}} 
+                                        
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="#"

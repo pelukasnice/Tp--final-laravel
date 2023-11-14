@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Vehiculo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +16,7 @@ class Conductor extends Model
 
     
 
-    public function automotores()
+    public function vehiculos()
     {
         return $this->hasMany(Vehiculo::class);
     }
