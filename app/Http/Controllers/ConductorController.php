@@ -47,6 +47,9 @@ class ConductorController extends Controller
         return redirect()->route('conductor.index')->with('success', 'Conductor registrado exitosamente');
     }
 
+    public function show($id){
+        $conductor = Conductor::find($id);
+    }
 
 
     public function destroy($conductor_id)
