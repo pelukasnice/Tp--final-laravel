@@ -146,6 +146,7 @@
                                             {{ $conductor->dni }}
                                         </td>
                                         <td class="px-6 py-4">
+                                            <!-- Si existen vehículos asociados al conductor, muestra la cantidad de vehículos; de lo contrario, muestra 0 -->
                                             {{ $conductor->vehiculos ? $conductor->vehiculos->count() : 0 }}
 
                                         </td>
@@ -154,6 +155,9 @@
 
                                         </td>
                                         <td class="px-6 py-4">
+                                            
+                                            <!-- RUTA PARA REDIRIGIR A ID DEL CONDUCTOR-->
+
                                             <a href="{{ route('conductor.show', ['id' => $conductor->id]) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
                                         </td>

@@ -49,8 +49,9 @@ class ConductorController extends Controller
 
     public function show($id){
         $conductor = Conductor::find($id);
+        $vehiculos = $conductor->vehiculos; // obtiene los vehiculos asociados al conductor
+        return view('conductores.show', ['conductor' => $conductor,'vehiculos' => $vehiculos]);
     }
-
 
     public function destroy($conductor_id)
     {
