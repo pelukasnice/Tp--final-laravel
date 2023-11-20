@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Models;
-
 use App\Models\Vehiculo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Conductor extends Model
+class Titular extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['nombre','dni',];
+    protected $fillable = ['apellido','nombre','dni','domicilio'];
 
-    protected $table = 'conductor';
+    protected $table = 'titulares';
 
     
 

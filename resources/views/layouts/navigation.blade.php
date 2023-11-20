@@ -17,8 +17,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('conductor.index')" :active="request()->routeIs('conductor.index')">
-                        CONDUCTORES
+                    <x-nav-link :href="route('titulares.index')" :active="request()->routeIs('titulares.index')">
+                        TITULARES
                     </x-nav-link>
                 </div>
             </div>

@@ -42,7 +42,8 @@
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form action="#" class="p-4 md:p-5">
+                                <form action="{{ route('titulares.vehiculos.store', ['id' => $conductor->id]) }}" method="POST" class="p-4 md:p-5">
+                                    @csrf
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="tipo_vehiculo"
@@ -51,7 +52,7 @@
                                             <select name="tipo_vehiculo" id="tipo_vehiculo"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 required="">
-                                                <option value="standard">Standard</option>
+                                                <option value="standar">Standar</option>
                                                 <option value="SUV">SUV</option>
                                                 <option value="Camioneta">Camioneta</option>
                                                 <option value="Camión">Camión</option>
@@ -94,7 +95,7 @@
                                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                                 clip-rule="evenodd"></path>
                                         </svg>
-                                        Agregar Conductor
+                                        Agregar Vehiculo
                                     </button>
                                 </form>
 

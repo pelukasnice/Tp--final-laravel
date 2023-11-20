@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AutosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\TitularController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/conductor',[ConductorController::class,'index'])->name('conductor.index');
-Route::post('/conductor',[ConductorController::class,'store'])->name('conductor.store');
-Route::get('/conductor/delete{id}',[ConductorController::class,'destroy'])->name('conductor.delete');
+Route::get('/titular',[TitularController::class,'index'])->name('titulares.index');
+Route::post('/titular',[TitularController::class,'store'])->name('titulares.store');
+Route::get('/titular/delete{id}',[TitularController::class,'destroy'])->name('titulares.delete');
 
-Route::get('/conductor/{id}', [ConductorController::class, 'show'])->name('conductor.show');
+Route::get('/titular/{id}', [TitularController::class, 'show'])->name('titulares.show');
+
+Route::post('/titular/{id}/vehiculos', [AutosController::class, 'store'])->name('titulares.vehiculos.store');
 
 require __DIR__.'/auth.php';

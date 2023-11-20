@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
-use App\Models\Conductor;
+use App\Models\Titular;
 use App\Models\Vehiculo;
 
-class ConductorController extends Controller
+class TitularController extends Controller
 {
     public function index()
     {
-        $conductores = Conductor::all();
-        return view("conductores.index", compact("conductores"));
+        $titulares = Titular::all();
+        return view("titulares.index", compact("titulares"));
     }
 
     public function store(Request $request)
@@ -24,13 +25,15 @@ class ConductorController extends Controller
         //]);
 
         // Crea un nuevo objeto Conductor 
-        $conductor = new Conductor([
+        $titular = new Titular([
             'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
             'dni' => $request->input('dni'),
+            'domicilio'=> $request->input('domicilio'),
         ]);
 
         // Guarda el nuevo conductor en la base de datos
-        $conductor->save();
+        $titular->save();
 
         // Crea un nuevo objeto Vehiculo
         $vehiculo = new Vehiculo([
@@ -41,22 +44,22 @@ class ConductorController extends Controller
         ]);
 
         // Asocia el vehículo al conductor y guarda en la base de datos
-        $conductor->vehiculos()->save($vehiculo);
+        $titular->vehiculos()->save($vehiculo);
 
         // Redirecciona después de almacenar
-        return redirect()->route('conductor.index')->with('success', 'Conductor registrado exitosamente');
+        return redirect()->route('titulares.index')->with('success', 'Conductor registrado exitosamente');
     }
 
     public function show($id){
-        $conductor = Conductor::find($id);
+        $conductor = Titular::find($id);
         $vehiculos = $conductor->vehiculos; // obtiene los vehiculos asociados al conductor
-        return view('conductores.show', ['conductor' => $conductor,'vehiculos' => $vehiculos]);
+        return view('titulares.show', ['conductor' => $conductor,'vehiculos' => $vehiculos]);
     }
 
     public function destroy($conductor_id)
     {
-        $conductor = Conductor::find($conductor_id);
+        $conductor = Titular::find($conductor_id);
         $conductor->delete();
-        return redirect()->route("conductor.index");
+        return redirect()->route("titular.index");
     }
 }

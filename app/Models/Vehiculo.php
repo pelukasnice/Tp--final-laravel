@@ -9,13 +9,13 @@ class Vehiculo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['marca', 'modelo', 'patente', 'tipo', 'conductor_id'];
+    protected $fillable = ['marca', 'modelo', 'patente', 'tipo', 'titular_id'];
 
-    protected $table = 'registro_vehiculo';
+    protected $table = 'autos';
 
     public function vehiculos()
     {
-        return $this->belongsTo(Conductor::class);
+        return $this->belongsTo(Titular::class);
     }
 
     public function infracciones()
