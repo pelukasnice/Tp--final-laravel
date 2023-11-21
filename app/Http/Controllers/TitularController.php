@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Models\Titular;
 use App\Models\Vehiculo;
@@ -52,8 +53,14 @@ class TitularController extends Controller
 
     public function show($id){
         $conductor = Titular::find($id);
-        $vehiculos = $conductor->vehiculos; // obtiene los vehiculos asociados al conductor
-        return view('titulares.show', ['conductor' => $conductor,'vehiculos' => $vehiculos]);
+        $vehiculos = $conductor->vehiculos;// obtiene los vehiculos asociados al conductor
+        $infracciones =  new Collection(); // Crea una colección vacía para las infracciones
+
+    foreach ($vehiculos as $vehiculo) {
+        $infracciones = $infracciones->merge($vehiculo->infracciones);
+    }
+         
+        return view('titulares.show', ['conductor' => $conductor,'vehiculos' => $vehiculos,'infracciones'=> $infracciones]);
     }
 
     public function destroy($conductor_id)
@@ -61,5 +68,24 @@ class TitularController extends Controller
         $conductor = Titular::find($conductor_id);
         $conductor->delete();
         return redirect()->route("titular.index");
+    }
+
+    public function edit($id){
+        $titular = Titular::find($id);
+        return view('edit.editTitulares', compact('titular'));
+    }
+
+    public function update(Request $request, $id){
+        $titular = Titular::find($id);
+
+        $titular->nombre = $request->input('nombre');
+        $titular->apellido = $request->input('apellido');
+        $titular->domicilio = $request->input('domicilio');
+        $titular->dni = $request->input('dni');
+
+        $titular->save();
+
+        return redirect()->route('titulares.index', ['id' => $titular->id])->with('success', 'Titular actualizado exitosamente');
+
     }
 }

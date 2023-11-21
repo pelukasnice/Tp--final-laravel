@@ -24,6 +24,30 @@ class AutosController extends Controller
 
     return redirect()->route('titulares.show', ['id' => $titular->id])->with('success', 'Vehículo agregado exitosamente');
     }
-}
+
+    public function edit($idVehiculo){
+      $vehiculo = Vehiculo::find($idVehiculo);
+
+      return view('edit.editVehiculos', compact('vehiculo'));
+    }
+
+    public function update(Request $request, $idVehiculo)
+    {
+        $vehiculo = Vehiculo::find($idVehiculo);        
+        // Actualiza los campos del vehículo según los datos del formulario
+        $vehiculo->tipo = $request->input('tipo');
+        $vehiculo->marca = $request->input('marca');
+        $vehiculo->modelo = $request->input('modelo');
+        $vehiculo->patente = $request->input('patente');
+        $vehiculo->save();
+
+        // Obtén al titular asociado al vehículo
+        $titular = Titular::find($vehiculo->titular_id);
+
+        return redirect()->route('titulares.show', ['id' => $titular->id])->with('success', 'Vehículo actualizado exitosamente');
+    }
+
+
+} 
 
 

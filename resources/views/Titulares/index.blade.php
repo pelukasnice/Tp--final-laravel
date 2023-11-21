@@ -47,7 +47,8 @@
                                         <!-- APELLIDO -->
                                         <div class="col-span-2">
                                             <label for="apellido"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">                                    Apellido</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Apellido</label>
                                             <input type="text" name="apellido" id="apellido"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 required="">
@@ -56,7 +57,7 @@
                                         <div class="col-span-2">
                                             <label for="nombre"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
-                                                </label>
+                                            </label>
                                             <input type="text" name="nombre" id="nombre"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 required="">
@@ -72,7 +73,8 @@
                                         <!-- DOMICILIO -->
                                         <div class="col-span-2">
                                             <label for="domicilio"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">                                              Domicilio</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Domicilio</label>
                                             <input type="text" name="domicilio" id="domicilio"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 required="">
@@ -92,10 +94,11 @@
                                             </select>
                                         </div>
                                         <!-- MARCA DEL VEHÍCULO -->
-                                        
+
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="marca_vehiculo"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marca del Vehículo</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marca
+                                                del Vehículo</label>
                                             <input type="text" name="marca_vehiculo" id="marca_vehiculo"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 required="">
@@ -171,11 +174,27 @@
 
                                         </td>
                                         <td class="px-6 py-4">
-                                            
+
                                             <!-- RUTA PARA REDIRIGIR A ID DEL CONDUCTOR-->
 
                                             <a href="{{ route('titulares.show', ['id' => $titular->id]) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
+
+                                            <div class="flex items-center">
+                                                <a href="{{ route('titulares.edit', ['id' => $titular->id]) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 20 20">
+                                                        <path
+                                                            d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z" />
+                                                    </svg>
+                                                </a>
+
+
+
+
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

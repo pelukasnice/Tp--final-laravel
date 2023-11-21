@@ -20,6 +20,6 @@ class Vehiculo extends Model
 
     public function infracciones()
     {
-        return $this->hasMany(Infraccion::class, 'vehiculo_id');
+        return $this->hasMany(Infraccion::class, 'auto_id');
     }
 }

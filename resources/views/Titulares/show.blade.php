@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Vehiculos asociados a {{ $conductor->nombre }}
+            Vehiculos asociados a {{ $conductor->nombre }} {{ $conductor->apellido }}
         </h2>
     </x-slot>
 
@@ -42,7 +42,8 @@
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form action="{{ route('titulares.vehiculos.store', ['id' => $conductor->id]) }}" method="POST" class="p-4 md:p-5">
+                                <form action="{{ route('titulares.vehiculos.store', ['id' => $conductor->id]) }}"
+                                    method="POST" class="p-4 md:p-5">
                                     @csrf
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2 sm:col-span-1">
@@ -99,36 +100,36 @@
                                     </button>
                                 </form>
 
-                                </div>
                             </div>
                         </div>
-                        
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table
-                                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead
-                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3"> Marca</th>
-                                        <th scope="col" class="px-6 py-3">Modelo</th>
-                                        <th scope="col" class="px-6 py-3">Patente</th>
-                                        <th scope="col" class="px-6 py-3">tipo</th>
-                                        <th scope="col" class="px-6 py-3">Accion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($vehiculos as $vehiculo)
+                    </div>
+
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3"> Marca</th>
+                                    <th scope="col" class="px-6 py-3">Modelo</th>
+                                    <th scope="col" class="px-6 py-3">Patente</th>
+                                    <th scope="col" class="px-6 py-3">tipo</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Cant. Infracciones</th>
+                                    <th scope="col" class="px-6 py-3">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($vehiculos as $vehiculo)
                                     <tr
                                         class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $vehiculo->marca }}
+                                            {{ strtoupper($vehiculo->marca) }}
                                         </th>
                                         <td class="px-6 py-4">
                                             {{ $vehiculo->modelo }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            
+
                                             {{ $vehiculo->patente }}
 
                                         </td>
@@ -136,19 +137,46 @@
                                             {{ $vehiculo->tipo }}
 
                                         </td>
+                                        <td class="px-6 py-4 text-center">
+                                            {{ $vehiculo->infracciones ? $vehiculo->infracciones->count() : 0 }}
+
+                                        </td>
                                         <td class="px-6 py-4">
 
                                             <!-- RUTA PARA REDIRIGIR A ID DEL CONDUCTOR-->
 
-                                            <a href="{{-- route('conductor.show', ['id' => $conductor->id]) --}}"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
+                                            <div class="flex items-center">
+                                                <a href="{{ route('infracciones.show', ['idVehiculo' => $vehiculo->id]) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+                                                    </svg>
+                                                </a>
+
+                                                <a href="{{ route('vehiculos.edit', ['idVehiculo' => $vehiculo->id]) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z"/>
+                                                      </svg>
+                                                </a>
+                                            </div>
+
+                                            
                                         </td>
                                     </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div> <br><br>
+                    <div class="flex items-center justify-center ">
+                        <a href="javascript:history.back()"
+                            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">
+                            Atrás
+                        </a>
                     </div>
-
                 </div>
             </div>
         </div>

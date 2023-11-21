@@ -10,6 +10,7 @@ class Infraccion extends Model
     use HasFactory;
 
     protected $fillable = ['fecha', 'descripcion', 'auto_id', 'tipo'];
+    protected $table = 'infracciones';
 
     public function automotor()
     {
