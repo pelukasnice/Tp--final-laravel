@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
             TITULARES
         </h2>
     </x-slot>
@@ -146,11 +146,12 @@
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3"> Nombre Y Apellido</th>
-                                    <th scope="col" class="px-6 py-3">DNI</th>
-                                    <th scope="col" class="px-6 py-3">Cant. Vehiculos</th>
-                                    <th scope="col" class="px-6 py-3">Cant.Multas</th>
-                                    <th scope="col" class="px-6 py-3">Accion</th>
+                                    <th scope="col" class="px-6 py-3 text-center"> Nombre Y Apellido</th>
+                                    <th scope="col" class="px-6 py-3 text-center">DNI</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Domicilio</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Cant. Vehiculos</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Cant.Multas</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,31 +159,48 @@
                                     <tr
                                         class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $titular->nombre }} {{ $titular->apellido }}
+                                            class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ Str::upper($titular->apellido) }} {{ $titular->nombre }}
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 text-center">
                                             {{ $titular->dni }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 text-center">
+                                            {{ $titular->domicilio }}
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
                                             <!-- Si existen vehículos asociados al conductor, muestra la cantidad de vehículos; de lo contrario, muestra 0 -->
                                             {{ $titular->vehiculos ? $titular->vehiculos->count() : 0 }}
 
                                         </td>
-                                        <td class="px-6 py-4">
-                                            {{ $titular->infracciones ? $titular->infracciones->count() : 0 }}
+                                        <td class="px-6 py-4 text-center">
+
+                                            @php
+                                                $totalInfracciones = 0;
+                                                foreach ($titular->vehiculos as $vehiculo) {
+                                                    $totalInfracciones += $vehiculo->infracciones->count();
+                                                }
+                                                echo $totalInfracciones;
+                                            @endphp
+
 
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 text-center">
 
-                                            <!-- RUTA PARA REDIRIGIR A ID DEL CONDUCTOR-->
-
-                                            <a href="{{ route('titulares.show', ['id' => $titular->id]) }}"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
-
+                                            <!-- ICONO VER-->
                                             <div class="flex items-center">
+                                                <a href="{{ route('titulares.show', ['id' => $titular->id]) }}"
+                                                    class="font-medium mr-3 text-blue-600 dark:text-blue-500 hover:underline">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 20 14">
+                                                        <path
+                                                            d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                                                    </svg>
+                                                </a>
+                                                <!-- ICONO EDITAR-->
                                                 <a href="{{ route('titulares.edit', ['id' => $titular->id]) }}"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    class="font-medium mr-3 text-blue-600 dark:text-blue-500 hover:underline">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white"
                                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         fill="currentColor" viewBox="0 0 20 20">
@@ -190,19 +208,56 @@
                                                             d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z" />
                                                     </svg>
                                                 </a>
-
-
-
-
+                                                <!-- ICONO BORRAR-->
+                                                <a href="{{ route('titulares.delete', ['id' => $titular->id]) }} "
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 18 20">
+                                                        <path
+                                                            d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z" />
+                                                    </svg>
+                                                </a>
                                             </div>
+
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="inline-flex -space-x-px text-sm">
+                            <li>
+                                @if ($titulares->onFirstPage())
+                                    <span
+                                        class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-300 bg-white border border-e-0 border-gray-300 rounded-s-lg cursor-not-allowed">Anterior</span>
+                                @else
+                                    <a href="{{ $titulares->previousPageUrl() }}"
+                                        class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Anterior</a>
+                                @endif
+                            </li>
 
+                            @for ($i = 1; $i <= $titulares->lastPage(); $i++)
+                                <li>
+                                    <a href="{{ $titulares->url($i) }}"
+                                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $i }}</a>
+                                </li>
+                            @endfor
 
+                            <li>
+                                @if ($titulares->hasMorePages())
+                                    <a href="{{ $titulares->nextPageUrl() }}"
+                                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Siguiente</a>
+                                @else
+                                    <span
+                                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-300 bg-white border border-gray-300 rounded-e-lg cursor-not-allowed">Sieguiente</span>
+                                @endif
+                            </li>
+                        </ul>
+                    </nav><br><br>
                 </div>
             </div>
         </div>

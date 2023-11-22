@@ -12,7 +12,7 @@ class TitularController extends Controller
 {
     public function index()
     {
-        $titulares = Titular::all();
+        $titulares = Titular::with('vehiculos.infracciones')->orderBy('apellido')->paginate(10);
         return view("titulares.index", compact("titulares"));
     }
 
@@ -63,11 +63,11 @@ class TitularController extends Controller
         return view('titulares.show', ['conductor' => $conductor,'vehiculos' => $vehiculos,'infracciones'=> $infracciones]);
     }
 
-    public function destroy($conductor_id)
+    public function destroy($id)
     {
-        $conductor = Titular::find($conductor_id);
+        $conductor = Titular::find($id);
         $conductor->delete();
-        return redirect()->route("titular.index");
+        return redirect()->route("titulares.index");
     }
 
     public function edit($id){

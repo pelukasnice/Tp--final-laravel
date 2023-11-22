@@ -17,6 +17,11 @@ class Titular extends Model
 
     public function vehiculos()
     {
-        return $this->hasMany(Vehiculo::class);
+        return $this->hasMany(Vehiculo::class, 'titular_id');
+    }
+
+    public function infracciones()
+    {
+        return $this->hasMany(Infraccion::class);
     }
 }
