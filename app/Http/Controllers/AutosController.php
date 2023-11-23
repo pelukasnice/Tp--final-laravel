@@ -47,6 +47,21 @@ class AutosController extends Controller
         return redirect()->route('titulares.show', ['id' => $titular->id])->with('success', 'Vehículo actualizado exitosamente');
     }
 
+    //public function show($id){
+      //$titular = Titular::find($id);
+      //$vehiculos = $titular->vehiculos;// obtiene los vehiculos asociados al conductor
+      
+       
+      //eturn view('titulares.show', ['conductor' => $titular,'vehiculos' => $vehiculos]);
+  //}
+  public function destroy($idVehiculo) {
+      $vehiculo = Vehiculo::find($idVehiculo);
+      $vehiculo->delete();
+      $titular = Titular::find($vehiculo->titular_id);
+
+      return redirect()->route('titulares.show', ['id' => $titular->id])->with('success', 'Vehículo eliminado exitosamente');
+     
+  }
 
 } 
 

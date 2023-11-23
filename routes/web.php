@@ -38,16 +38,17 @@ Route::put('/titular/{id}', [TitularController::class, 'update'])->name('titular
 Route::get('/titular/delete{id}',[TitularController::class,'destroy'])->name('titulares.delete');
 Route::get('/titular/{id}', [TitularController::class, 'show'])->name('titulares.show');
 
+//Route::get('/vehiculos/{id}/', [AutosController::class, 'show'])->name('vehiculos.show');
 Route::post('/titular/{id}/vehiculos', [AutosController::class, 'store'])->name('titulares.vehiculos.store');
 Route::get('/vehiculos/{idVehiculo}/editar', [AutosController::class, 'edit'])->name('vehiculos.edit');
 Route::put('/vehiculos/{idVehiculo}', [AutosController::class, 'update'])->name('vehiculos.update');
-
+Route::delete('/vehiculos/{idVehiculo}', [AutosController::class,'destroy'])->name('vehiculos.delete');
 
 
 Route::get('/infracciones/{idVehiculo}', [InfraccionController::class, 'show'])->name('infracciones.show');
 Route::post('/infracciones/{idVehiculo}', [InfraccionController::class, 'store'])->name('infracciones.store');
 Route::get('/infracciones/{idInfraccion}/editar', [InfraccionController::class, 'edit'])->name('infracciones.edit');
 Route::put('/infracciones/{idInfraccion}', [InfraccionController::class, 'update'])->name('infraccion.update');
-
+Route::delete('/infracciones/{idInfraccion}', [AutosController::class,'destroy'])->name('infracciones.delete');
 
 require __DIR__.'/auth.php';

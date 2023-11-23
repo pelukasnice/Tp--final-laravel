@@ -13,6 +13,10 @@ class Vehiculo extends Model
 
     protected $table = 'autos';
 
+    public function titular()
+    {
+        return $this->belongsTo(Titular::class, 'titular_id');
+    }
     public function vehiculos()
     {
         return $this->belongsTo(Titular::class);

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Vehiculos asociados a {{ $conductor->nombre }} {{ $conductor->apellido }}
+        <h2 class="font-semibold text-xl text-center text-gray-800 dark:text-gray-200 leading-tight">
+            Vehiculos asociados a {{ Str::upper($conductor->apellido) }} {{ $conductor->nombre }} 
         </h2>
     </x-slot>
 
@@ -114,7 +114,7 @@
                                     <th scope="col" class="px-6 py-3">Patente</th>
                                     <th scope="col" class="px-6 py-3">tipo</th>
                                     <th scope="col" class="px-6 py-3 text-center">Cant. Infracciones</th>
-                                    <th scope="col" class="px-6 py-3">Accion</th>
+                                    <th scope="col" class="px-6 py-3 ">Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -147,10 +147,8 @@
 
                                             <div class="flex items-center">
                                                 <a href="{{ route('infracciones.show', ['idVehiculo' => $vehiculo->id]) }}"
-                                                    class="font-medium mr-4 text-blue-600 dark:text-blue-500 hover:underline">
-                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-                                                        <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                                                      </svg>
+                                                    class="font-medium mr-4 text-blue-600 dark:text-blue-500 hover:underline"> Ver infrac.
+                                                    
                                                 </a>
 
                                                 <a href="{{ route('vehiculos.edit', ['idVehiculo' => $vehiculo->id]) }}"
@@ -160,12 +158,16 @@
                                                       </svg>
                                                 </a>
 
-                                                <a href="{{ route('vehiculos.edit', ['idVehiculo' => $vehiculo->id]) }}"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                                        <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
-                                                      </svg>
-                                                </a>
+                                                <form method="POST" action="{{ route('vehiculos.delete', ['idVehiculo' => $vehiculo->id]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                                            <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                
                                             </div>
 
                                             

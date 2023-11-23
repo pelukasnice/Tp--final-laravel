@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Vehiculos asociados a {{ $vehiculo->marca }}
+        <h2 class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Infracciones asociadas a vehiculo: {{ Str::upper($vehiculo->marca) }} patente: {{ Str::upper($vehiculo->patente) }} 
     </x-slot>
 
     <div class="py-12">
@@ -44,6 +44,7 @@
                                 <form action="{{ route('infracciones.store', ['idVehiculo' => $vehiculo->id]) }}"
                                     method="POST" class="p-4 md:p-5">
                                     @csrf
+                                    <input type="hidden" name="idTitular" value="{{ $idTitular }}">
                                     <!-- FECHA DE LA INFRACCIÓN -->
                                     <div class="col-span-2">
                                         <label for="fecha_infraccion"
@@ -134,18 +135,7 @@
                                                     <path
                                                         d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z" />
                                                 </svg>
-                                            </a>
-
-
-                                            <a href="{{ route('infracciones.show', ['idVehiculo' => $vehiculo->id]) }}"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
-                                                </svg>
-                                            </a>
+                                            </a>                                         
 
 
                                         </div>

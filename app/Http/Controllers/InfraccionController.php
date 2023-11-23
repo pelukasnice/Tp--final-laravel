@@ -14,8 +14,9 @@ class InfraccionController extends Controller
         $vehiculo = Vehiculo::find($idVehiculo);
         $titular = $vehiculo->titular;
         $infracciones = $vehiculo->infracciones;
+        $idTitular = $titular->id;
 
-        return view('titulares.infracciones', ['titular' => $titular, 'vehiculo' => $vehiculo, 'infracciones' => $infracciones]);
+        return view('titulares.infracciones', ['titular' => $titular, 'vehiculo' => $vehiculo, 'infracciones' => $infracciones,'idTitular'=> $idTitular]);
     }
 
     public function store(Request $request, $idVehiculo)
@@ -55,9 +56,8 @@ class InfraccionController extends Controller
         return redirect()->route('infracciones.show', ['idVehiculo' => $infraccion->auto_id])->with('success', 'Infracción actualizada exitosamente');
 
     }
-    public function redirect($id){
-        $titular =  Titular::find($id);
-        
-        return redirect()->route("titulares.show", ['id' => $titular->id]);
-    }
+    
+    
+  
+    
 }
